@@ -39,6 +39,7 @@ return res.status(200).json({message:'User added successfully'})
 });
 
 app.post('/login', function(req, res) {
+
   // Add logic to decode body
   // body should have email and password
 
@@ -49,10 +50,20 @@ app.post('/login', function(req, res) {
   // If the password is the same, return back 200 status code to the client
   // Also send back a token (any random string will do for now)
   // If the password is not the same, return back 401 status code to the client
-
-
   res.send('Hello World from route 2!')
-})
+
+  const {email , password} = res.body;
+
+  const user = USERS.find(user => user.email === email);
+  if(!user){
+    return res.status(401).json({message:"email doesn't exist!"});
+  }else if(password !== user.password){
+    return res.status(401).json({message:"Invald password!"});
+  }else{
+    return res.status(200).json({message:"Logged In Successfully!", token: "Random Token #i1ockgiwaoqvrkfi231cke"});
+  }
+  
+});
 
 app.get('/questions', function(req, res) {
 
