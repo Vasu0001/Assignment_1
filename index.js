@@ -21,14 +21,22 @@ const SUBMISSION = [
 app.post('/signup', function(req, res) {
   // Add logic to decode body
   // body should have email and password
-
-
   //Store email and password (as is for now) in the USERS array above (only if the user with the given email doesnt exist)
+// return back 200 status code to the client
+res.send('Hello World!')
 
+const {email, password} = req.body;
 
-  // return back 200 status code to the client
-  res.send('Hello World!')
-})
+// Check if user already exists
+const existingUser = USERS.find(user => user.email === email);
+if(!existingUser){
+  USERS.push({email,password});
+return res.status(200).json({message:'User added successfully'})
+}else{
+  return res.status(401).json({message:'User already exists'});
+}
+
+});
 
 app.post('/login', function(req, res) {
   // Add logic to decode body
