@@ -23,7 +23,7 @@ app.post('/signup', function(req, res) {
   // body should have email and password
   //Store email and password (as is for now) in the USERS array above (only if the user with the given email doesnt exist)
 // return back 200 status code to the client
-res.send('Hello World!')
+
 
 const {email, password} = req.body;
 
@@ -50,7 +50,7 @@ app.post('/login', function(req, res) {
   // If the password is the same, return back 200 status code to the client
   // Also send back a token (any random string will do for now)
   // If the password is not the same, return back 401 status code to the client
-  res.send('Hello World from route 2!')
+  
 
   const {email , password} = res.body;
 
@@ -69,6 +69,7 @@ app.get('/questions', function(req, res) {
 
   //return the user all the questions in the QUESTIONS array
   res.send("Hello World from route 3!")
+
 })
 
 app.get("/submissions", function(req, res) {
