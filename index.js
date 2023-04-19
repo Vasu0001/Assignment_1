@@ -68,20 +68,38 @@ app.post('/login', function(req, res) {
 app.get('/questions', function(req, res) {
 
   //return the user all the questions in the QUESTIONS array
-  res.send("Hello World from route 3!")
+  res.status(200).json(QUESTIONS);
 
 })
+
+
 
 app.get("/submissions", function(req, res) {
    // return the users submissions for this problem
   res.send("Hello World from route 4!")
 });
 
+// ramdomly choose a number
+
+function randomNumber() {
+  const randomNum = Math.floor(Math.random() * 2);
+   if (randomNum === 0) {
+    return "rejected";
+  } else {
+    return "accepted";
+  }
+}
+
 
 app.post("/submissions", function(req, res) {
    // let the user submit a problem, randomly accept or reject the solution
    // Store the submission in the SUBMISSION array above
-  res.send("Hello World from route 4!")
+  
+   const { problem, solution } = req.body;
+  const status = randomNumber();
+  SUBMISSIONS.push({ problem, solution, status });
+  res.status(200).json({ status, message: "Submission received." });
+
 });
 
 // leaving as hard todos
